@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clothing.dao.ClothingMapper">
+  <resultMap id="BaseResultMap" type="com.clothing.entity.Clothing">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="clothingname" jdbcType="VARCHAR" property="clothingname" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cid, tid, clothingname, price, imgpath, createdate, comment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_clothing
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_clothing
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.clothing.entity.Clothing">
+    insert into t_clothing (cid, tid, clothingname, 
+      price, imgpath, createdate, 
+      comment)
+    values (#{cid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{clothingname,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{imgpath,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, 
+      #{comment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clothing.entity.Clothing">
+    insert into t_clothing
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="clothingname != null">
+        clothingname,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="imgpath != null">
+        imgpath,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="clothingname != null">
+        #{clothingname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="imgpath != null">
+        #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clothing.entity.Clothing">
+    update t_clothing
+    <set>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="clothingname != null">
+        clothingname = #{clothingname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="imgpath != null">
+        imgpath = #{imgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clothing.entity.Clothing">
+    update t_clothing
+    set tid = #{tid,jdbcType=INTEGER},
+      clothingname = #{clothingname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      imgpath = #{imgpath,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      comment = #{comment,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>

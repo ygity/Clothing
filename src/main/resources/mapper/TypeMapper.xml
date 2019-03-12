@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clothing.dao.TypeMapper">
+  <resultMap id="BaseResultMap" type="com.clothing.entity.Type">
+    <id column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="typename" jdbcType="VARCHAR" property="typename" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="standard" jdbcType="INTEGER" property="standard" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tid, typename, pid, standard
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_type
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_type
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.clothing.entity.Type">
+    insert into t_type (tid, typename, pid, 
+      standard)
+    values (#{tid,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
+      #{standard,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.clothing.entity.Type">
+    insert into t_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="typename != null">
+        typename,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="standard != null">
+        standard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="typename != null">
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="standard != null">
+        #{standard,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clothing.entity.Type">
+    update t_type
+    <set>
+      <if test="typename != null">
+        typename = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="standard != null">
+        standard = #{standard,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clothing.entity.Type">
+    update t_type
+    set typename = #{typename,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      standard = #{standard,jdbcType=INTEGER}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="menuMap" type="com.clothing.vo.VMwnuInfo">
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+  </resultMap>
+  <select id="select" resultMap="menuMap" parameterType="int">
+    SELECT p.tid pid,p.typename pname,c.typename cname from t_type p
+INNER JOIN t_type c
+on c.pid = p.tid
+where p.tid = #{tid}
+  </select>
+  <select id="selectAllone"  resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from t_type where standard = 1
+  </select>
+</mapper>
