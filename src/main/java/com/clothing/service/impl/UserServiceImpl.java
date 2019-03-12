@@ -15,7 +15,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userdao;
 
-
     @Override
     public ResultVo login(String uname, String password) {
 
@@ -36,7 +35,6 @@ public class UserServiceImpl implements UserService {
        if(user!= null){
            return  ResultUtil.exec(true,"ok",null);
        }
-
 
         return ResultUtil.exec(false,"该用户不存在",null);
     }

@@ -16,6 +16,7 @@
     from t_cart
     where caid = #{caid,jdbcType=INTEGER}
   </select>
+  <!--从购物车删除服装-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_cart
     where caid = #{caid,jdbcType=INTEGER}
@@ -26,6 +27,7 @@
     values (#{caid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
       #{uid,jdbcType=INTEGER})
   </insert>
+  <!--添加服装到购物车-->
   <insert id="insertSelective" parameterType="com.clothing.entity.Cart">
     insert into t_cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -79,4 +81,16 @@
       uid = #{uid,jdbcType=INTEGER}
     where caid = #{caid,jdbcType=INTEGER}
   </update>
+  <!--展示用户购物车-->
+<select id="showUserCart"  parameterType="java.lang.Integer" resultType="com.clothing.common.vo.VCart">
+SELECT u.uid,ca.caid,c.imgpath,c.clothingname,ca.num,c.price
+				 FROM t_cart ca
+				 INNER JOIN t_clothing c
+				 ON ca.cid = c.cid
+				 INNER JOIN t_user u
+				 ON ca.uid = u.uid
+				 WHERE u.uid =#{uid}
+
+
+</select>
 </mapper>
