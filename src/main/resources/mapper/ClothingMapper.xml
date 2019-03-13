@@ -114,4 +114,8 @@
       comment = #{comment,jdbcType=VARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
+  <select id="selectAll" parameterType="int" resultType="com.clothing.entity.Clothing">
+    select <include refid="Base_Column_List" />  from t_clothing
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
 </mapper>

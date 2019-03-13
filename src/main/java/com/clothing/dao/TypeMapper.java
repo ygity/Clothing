@@ -2,6 +2,7 @@ package com.clothing.dao;
 
 import com.clothing.entity.Type;
 import com.clothing.vo.VMwnuInfo;
+import com.clothing.vo.Vvinfo;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface TypeMapper {
 
     List<Type> selectAllone();
 
+    List<Vvinfo> selectAll(Integer tid);
 }

@@ -83,14 +83,32 @@
     <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="pname" jdbcType="VARCHAR" property="pname" />
     <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="tid" jdbcType="VARCHAR" property="tid" />
   </resultMap>
   <select id="select" resultMap="menuMap" parameterType="int">
-    SELECT p.tid pid,p.typename pname,c.typename cname from t_type p
+    SELECT p.tid pid,p.typename pname,c.typename cname, c.tid from t_type p
 INNER JOIN t_type c
 on c.pid = p.tid
 where p.tid = #{tid}
   </select>
   <select id="selectAllone"  resultMap="BaseResultMap">
     select <include refid="Base_Column_List" /> from t_type where standard = 1
+  </select>
+  <resultMap id="vvo" type="com.clothing.vo.Vvinfo">
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="clothingname" jdbcType="VARCHAR" property="clothingname" />
+    <result column="imgpath" jdbcType="VARCHAR" property="imgpath" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+  </resultMap>
+  <select id="selectAll" resultMap="vvo" parameterType="int">
+    SELECT p.tid pid,p.typename pname,c.typename cname,c.tid,t.clothingname,t.imgpath,t.cid from t_type p
+INNER JOIN t_type c
+on c.pid = p.tid
+INNER JOIN t_clothing t
+on c.tid = t.tid
+where c.tid = #{tid}
   </select>
 </mapper>

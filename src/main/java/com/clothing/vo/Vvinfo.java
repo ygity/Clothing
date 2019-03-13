@@ -1,14 +1,13 @@
 package com.clothing.vo;
 
-import java.util.List;
-
-public class VMwnuInfo {
+public class Vvinfo {
     private Integer pid;
     private String pname;
     private String cname;
     private Integer tid;
-
-    private List<VMwnuInfo> vMwnuInfos;//子菜单列表
+    private String clothingname;
+    private String imgpath;
+    private Integer cid;
 
     public Integer getPid() {
         return pid;
@@ -34,19 +33,35 @@ public class VMwnuInfo {
         this.cname = cname;
     }
 
-    public List<VMwnuInfo> getvMwnuInfos() {
-        return vMwnuInfos;
-    }
-
-    public void setvMwnuInfos(List<VMwnuInfo> vMwnuInfos) {
-        this.vMwnuInfos = vMwnuInfos;
-    }
-
     public Integer getTid() {
         return tid;
     }
 
     public void setTid(Integer tid) {
         this.tid = tid;
+    }
+
+    public String getClothingname() {
+        return clothingname;
+    }
+
+    public void setClothingname(String clothingname) {
+        this.clothingname = clothingname;
+    }
+
+    public String getImgpath() {
+        return imgpath;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath;
+    }
+
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
     }
 }

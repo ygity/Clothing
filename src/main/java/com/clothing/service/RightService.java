@@ -8,4 +8,5 @@ import java.util.List;
 public interface RightService {
     ResultVo select(Integer tid);
     ResultVo selectAllOne();
+    ResultVo selectAll(Integer tid);
 }

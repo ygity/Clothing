@@ -14,4 +14,6 @@ public interface ClothingMapper {
     int updateByPrimaryKeySelective(Clothing record);
 
     int updateByPrimaryKey(Clothing record);
+
+    Clothing selectAll(Integer cid);
 }

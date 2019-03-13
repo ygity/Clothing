@@ -6,6 +6,7 @@ import com.clothing.dao.TypeMapper;
 import com.clothing.entity.Type;
 import com.clothing.service.RightService;
 import com.clothing.vo.VMwnuInfo;
+import com.clothing.vo.Vvinfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,15 @@ public class RightServiceImpl implements RightService {
     @Override
     public ResultVo selectAllOne() {
         List<Type> list = typeDao.selectAllone();
+        if (list != null){
+            return  ResultUtil.exec(true,"ok",list);
+        }
+        return ResultUtil.exec(false,"该等级不存在",null);
+    }
+
+    @Override
+    public ResultVo selectAll(Integer tid) {
+        List<Vvinfo> list = typeDao.selectAll(tid);
         if (list != null){
             return  ResultUtil.exec(true,"ok",list);
         }

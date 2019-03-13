@@ -25,4 +25,10 @@ public class TypeController {
     public ResultVo selectOne(){
         return  typeservice.selectAllOne();
     }
+
+    @ApiOperation(value = "查询对应的所有商品查询",notes = "根据输入的二级菜单的号查询对应的所有商品")
+    @PostMapping("selectAll.do")
+    public ResultVo select(Integer tid){
+        return  typeservice.selectAll(tid);
+    }
 }
