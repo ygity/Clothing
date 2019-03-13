@@ -52,4 +52,41 @@ public class UserServiceImpl implements UserService {
        }
         return ResultUtil.exec(false,"该用户已存在",null);
     }
+
+    @Override
+    public ResultVo findPasswordByNameAndPhone(String uname,String phone) {
+
+        User user =  userdao.findByNameAndPhone(uname,phone);
+            if(user == null){
+
+                ResultUtil.exec(false,"未找到相应账号",null);
+            }
+        return ResultUtil.exec(true,"ok",user.getPassword());
+    }
+
+    @Override
+    public ResultVo finduserByNameAndPhone(String uname, String phone) {
+
+        User user =  userdao.findByNameAndPhone(uname,phone);
+        if(user == null){
+
+            ResultUtil.exec(false,"未找到相应账号",null);
+        }
+        return ResultUtil.exec(true,"ok",user);
+
+    }
+
+
+    @Override
+    public ResultVo updatePassword(User user) {
+
+
+        if(user!= null){
+         userdao.updatePassword(user);
+                return ResultUtil.exec(true,"ok",null);
+
+        }
+
+        return ResultUtil.exec(false,"用户名或者手机号错误",null);
+    }
 }

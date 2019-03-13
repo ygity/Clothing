@@ -21,5 +21,9 @@ public interface UserMapper {
     //登录
     User selectByName(String uname);
 
+    //找回密码
+    User findByNameAndPhone(String uname,String phone);
 
+    //修改密码或电话
+    void  updatePassword(User user);
 }

@@ -6,7 +6,7 @@ import com.clothing.common.vo.ResultVo;
 import com.clothing.common.vo.VCart;
 import com.clothing.dao.CartMapper;
 import com.clothing.entity.Cart;
-import com.clothing.entity.User;
+
 import com.clothing.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

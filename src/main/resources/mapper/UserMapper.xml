@@ -91,5 +91,15 @@
     where uname=#{uname}
 
   </select>
+<select id="findByNameAndPhone"  parameterType="com.clothing.entity.User" resultMap="BaseResultMap" >
 
+  SELECT * FROM t_user WHERE  uname = #{uname} and phone = #{phone}
+
+</select>
+  <update id="updatePassword" parameterType="com.clothing.entity.User" >
+    update t_user
+    set
+      password = #{password}
+    where uname = #{uname} and phone = #{phone}
+  </update>
 </mapper>

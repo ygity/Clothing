@@ -12,4 +12,15 @@ public interface UserService {
     //注册
     ResultVo insert(User user);
 
+    //通过用户名和电话号码找回密码
+    ResultVo findPasswordByNameAndPhone(String uname,String phone);
+
+
+    //通过用户名和电话号码查找用户
+    ResultVo finduserByNameAndPhone(String uname,String phone);
+
+
+    //通过用户名和手机号修改密码
+    ResultVo updatePassword(User user);
+
 }
