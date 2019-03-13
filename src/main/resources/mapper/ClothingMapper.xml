@@ -118,4 +118,7 @@
     select <include refid="Base_Column_List" />  from t_clothing
     where cid = #{cid,jdbcType=INTEGER}
   </select>
+  <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+    select * from t_clothing where clothingname like #{clothingname}
+  </select>
 </mapper>

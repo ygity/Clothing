@@ -5,4 +5,6 @@ import com.clothing.entity.Clothing;
 
 public interface ClothingService {
     ResultVo selectAll(Integer cid);
+
+    ResultVo selectByname(String clothingname);
 }

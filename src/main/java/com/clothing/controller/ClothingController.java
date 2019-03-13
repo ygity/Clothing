@@ -20,4 +20,10 @@ public class ClothingController {
     public ResultVo checkUser(Integer cid){
         return closervice.selectAll(cid);
     }
+
+    @ApiOperation(value = "查询商品",notes = "根据模糊查询查出其对应的商品")
+    @PostMapping("selectByName.do")
+    public ResultVo selectByname(String clothingname){
+        return closervice.selectByname(clothingname);
+    }
 }
