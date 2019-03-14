@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clothing.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.clothing.entity.Order">
+    <id column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="totalprice" jdbcType="DOUBLE" property="totalprice" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oid, ordernum, totalprice, state, createdate, uid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where oid = #{oid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where oid = #{oid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.clothing.entity.Order">
+    insert into t_order (oid, ordernum, totalprice, 
+      state, createdate, uid
+      )
+    values (#{oid,jdbcType=INTEGER}, #{ordernum,jdbcType=VARCHAR}, #{totalprice,jdbcType=DOUBLE}, 
+      #{state,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="oid" parameterType="com.clothing.entity.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oid != null">
+        oid,
+      </if>
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oid != null">
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.clothing.entity.Order">
+    update t_order
+    <set>
+      <if test="ordernum != null">
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.clothing.entity.Order">
+    update t_order
+    set ordernum = #{ordernum,jdbcType=VARCHAR},
+      totalprice = #{totalprice,jdbcType=DOUBLE},
+      state = #{state,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      uid = #{uid,jdbcType=INTEGER}
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+
+  <select id="findOrderByUid" parameterType="java.lang.Integer" resultType="com.clothing.common.vo.VOrder">
+
+SELECT  od.oid,o.uid,o.ordernum ,c.clothingname ,o.totalprice,o.state,o.createdate,c.imgpath FROM t_order o
+INNER JOIN t_orderdetail od
+ON od.oid = o.oid
+INNER JOIN t_clothing c
+ON c.cid = od.cid
+WHERE o.uid =  #{uid}
+  </select>
+
+</mapper>
